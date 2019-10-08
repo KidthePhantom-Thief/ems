@@ -8,15 +8,6 @@ from django.test import TestCase
 
 # 4 没登录的 验证
 print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
-print('123456')
+
+
 # 可不选 恢复区
