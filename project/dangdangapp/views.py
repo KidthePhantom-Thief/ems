@@ -10,14 +10,14 @@ def index(request):
     status = request.session.get('username')
     if not status:
         status = 0
-    print(status)
+
     book = TBook.objects.filter()
     book2 = TBook.objects.filter().order_by('-shelves_date')[:8]
     book3 = TBook.objects.filter().order_by('-shelves_date', '-sales')[:5]
     book4 = TBook.objects.filter().order_by('-book_price')[:8]
-    print(book)
+
     dca = DCategory.objects.filter()
-    print(dca)
+
     return render(request, 'dangdangapp/index.html', {
         'book': book,
         'book2': book2,
@@ -31,9 +31,6 @@ def sort(request):
     id = request.GET.get('id')
     way = request.GET.get('way')
     category_id = request.GET.get('category_id')
-    print(id)
-    print(way)
-    print(category_id)
     return HttpResponse('12345678')
 
 
@@ -43,9 +40,9 @@ def book_list(request):
         status = 0
     num = request.GET.get('id')
     category_id = request.GET.get('category_id')
-    print(num)
+
     dca = DCategory.objects.filter()
-    print(category_id)
+
 
     child_name = 0
     parent_name = 0
@@ -62,11 +59,11 @@ def book_list(request):
         if DCategory.objects.get(category_id=category_id).category_pid:
             book = TBook.objects.filter(book_category=category_id)
             child_name = DCategory.objects.get(category_id=category_id).category_name
-            print(child_name)
+
             parent_id = DCategory.objects.get(category_id=category_id).category_pid
-            print(parent_id)
+
             parent_name = DCategory.objects.get(category_id=parent_id).category_name
-            print(parent_name)
+
         # 没有pid的 大类
         else:
             parent_name = DCategory.objects.get(category_id=category_id).category_name
@@ -93,7 +90,6 @@ def book_list(request):
     if page.number >= 5:
         a = str(page.number - 4) + ':' + str(page.number + 3)
 
-    print(child_id)
     return render(request, 'dangdangapp/booklist.html', {
         'page': page,
         'dca': dca,
