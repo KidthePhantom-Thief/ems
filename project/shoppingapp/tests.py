@@ -7,5 +7,16 @@ from django.test import TestCase
 # 2 其他位置存储数据库订单
 
 # 4 没登录的 验证
-
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
+print('123456')
 # 可不选 恢复区
