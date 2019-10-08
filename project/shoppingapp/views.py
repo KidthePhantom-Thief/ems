@@ -35,7 +35,7 @@ class Cart():
     def add_car(self, book_id, num):
         book_id = int(book_id)
         for i in self.cart_items:
-            print(i, 33333333333333333333333333333333)
+
             if i.book.book_id == book_id:
                 i.count += num
                 print(i.count)
@@ -43,9 +43,9 @@ class Cart():
                 return
         print(self.cart_items)
         a = TBook.objects.get(book_id=book_id)
-        print(a, 'aaaaaaaaaaaaaaaaaaaa')
+
         self.cart_items.append(Cart_items(a, num))
-        print(self.cart_items, 'acccccccccccccccccccccccccccccc')
+
         self.sums()
 
     # 删除商品
@@ -72,16 +72,16 @@ def cart_default(b):
 
 def car(request):
     username = request.session.get('username')
-    print(username)
+
     if username:
 
         cart1 = request.session.get('cart1')
-        print(cart1)
+
         cart1 = ''
         user_id = TUser.objects.get(user_email=username).user_id
         ls = []
         for i in TShoppingCart.objects.filter(user_id=user_id):
-            print(i.book_id)
+
             if cart1:
                 cart1.add_car(i.book_id, i.count)
 
@@ -89,7 +89,7 @@ def car(request):
             else:
                 cart1 = Cart()
                 cart1.add_car(i.book_id, i.count)
-                print(cart1.total_price, 'qqqqqqqqqqqqqqqqqqqqqqqqqqq')
+
                 request.session['cart1'] = cart1
         return render(request, 'shoppingapp/car.html', {
             'status': username,
@@ -149,7 +149,7 @@ def add_cart(request):
 def change_car_cart(request):
     book_id = request.POST.get('a')
     value = request.POST.get('value')
-    print(book_id, value)
+
     int_value = int(value)
     int_book_id = int(book_id)
     username = request.session.get('username')
@@ -164,10 +164,9 @@ def change_car_cart(request):
             cart_book.count = int_value
             cart_book.save()
             save_money = cart1.save_price
-            print(save_money)
+
             cost = cart1.total_price
-            print(cost)
-            print(111111111111111111111111111)
+
             request.session['cart1'] = cart1
             str1 = '[' + str(cost) + ',' + str(save_money) + ']'
 
@@ -177,7 +176,7 @@ def change_car_cart(request):
 
             cost = cart.total_price
 
-            print(cost)
+
             request.session['cart'] = cart
             save_money = cart.save_price
             str1 = '[' + str(cost) + ',' + str(save_money) + ']'
@@ -189,7 +188,7 @@ def change_car_cart(request):
 
 def del_car_cart(request):
     book_id = request.POST.get('book_id')
-    print(book_id)
+
     username = request.session.get('username')
     try:
         if username:
@@ -199,8 +198,7 @@ def del_car_cart(request):
             cart1.del_car(book_id)
             json.dumps(list(cart1),default=cart_default)
             # request.session['cart1'] = cart1
-            print(cart1)
-            print(cart1.cart_items)
+
         else:
             cart = request.session.get('cart')
             cart.del_car(book_id)
